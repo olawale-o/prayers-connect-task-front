@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react';
-// import AppContext from '../context/AppContext';
-// import useTodoDispatch from '../hooks/useTodoDispatch';
+import React, { useState } from 'react';
+import useTaskDispatch from '../hooks/useTaskDispatch';
 import TaskService from '../services/task';
 
 const TaskForm = () => {
-  // const dispatch = useTodoDispatch();
-  // const { setStatusText } = useContext(AppContext);
+  const dispatch = useTaskDispatch();
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -21,7 +19,7 @@ const TaskForm = () => {
     e.preventDefault();
     const data = await TaskService.add({ ...values })
     if (data) {
-      // dispatch.addTask(data)
+      dispatch('create', data);
     }
     setValues({
       title: '',
