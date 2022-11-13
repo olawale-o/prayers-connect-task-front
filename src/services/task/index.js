@@ -6,8 +6,8 @@ export default class TaskService {
     return data.task;
   }
 
-  static async getAllTasks() {
-    const data = await get('task');
+  static async getAllTasks(filter = 'todo') {
+    const data = await get('task', filter);
     return data;
   }
 
