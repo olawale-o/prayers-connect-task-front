@@ -21,8 +21,8 @@ export const post = async (endpoint, payload) => {
   return data;
 };
 
-export const get = async (endpoint) => {
-  const response = await fetch(`${BASE_URI}${endpoint}`);
+export const get = async (endpoint, filter) => {
+  const response = await fetch(`${BASE_URI}${endpoint}?status=${filter}`);
   if (!response.ok) {
     throw new Error('Failed to fetch request');
   }
