@@ -1,13 +1,280 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+:root {
+  --primary-color: #f44556;
+  --blur-primary-color: rgb(255, 95, 110);
+  --border-color: rgb(244, 69, 86);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 62.5%;
+  font-family: 'Roboto', sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+.p-2 {
+  padding: 2rem;
+}
+
+.green {
+  background-color: rgb(114, 216, 114);
+}
+
+.blue {
+  background-color: rgb(103, 103, 211);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 10px;
+  background-color: #ccc;
+  padding: 2rem;
+  border-radius: 5px;
+  width: 400px;
+}
+
+.toast-text {
+  font-size: 1.5rem;
+  width: calc(80% - 2rem);
+  line-height: 1.6;
+}
+
+.task-container {
+  flex: 1 1 calc(50% - 4rem);
+}
+
+.task-form {
+  flex: 1 1 calc(50% - 4rem);
+}
+
+.task-list {
+  width: 100%;
+}
+
+.task-category {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.task-category_container {
+  width: 100%;
+}
+
+.task-category__heading {
+  font-size: 3.5rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.task-item {
+  width: 100%;
+  margin-bottom: 1rem;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  text-transform: capitalize;
+  padding: 0.8rem;
+  transition: box-shadow 500ms linear;
+}
+
+.task-item:hover {
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.65);
+}
+
+.task-item__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-item__header {
+  width: 100%;
+}
+
+.task-item__title {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.task-item__category {
+  font-size: 1.5rem;
+  align-self: flex-end;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.task-form {
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+.task-form__title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.status {
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: lowercase;
+  align-self: baseline;
+  padding-inline: 0.8rem;
+  padding-block: 0.25rem;
+  border-radius: 10px;
+  color: #000;
+}
+
+.field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.8rem;
+  font-weight: 300;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 500ms linear;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  outline: var(--primary-color);
+}
+
+.textarea {
+  font-weight: 300;
+  line-height: 1.6;
+  padding: 0.8rem;
+  outline: none;
+  border: 1px solid #ccc;
+  transition: border-color 500ms linear;
+  resize: none;
+  width: 100%;
+  min-height: 8rem;
+}
+
+.textarea:focus-within {
+  outline: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn {
+  display: block;
+  padding: 1rem;
+  width: 100%;
+  outline: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  transition: background 500ms linear;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+}
+.btn-primary:hover {
+  background-color: var(--blur-primary-color);
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+
+.todo-tabs {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.todo-tab {
+  padding: 1rem;
+  width: calc(50% - 2px);
+  cursor: pointer;
+}
+
+.todo-tab.active {
+  color: #fff;
+  background-color: #ccc;
+  font-weight: 700;
+}
+
+.todo-tab-item {
+  font-size: 14px;
+}
+
+.task-status {
+  display:  flex;
+  justify-content: space-between;
+}
+
+.status-chip {
+  background: none;
+  border: none;
+  outline: none;
+  color:#fff;
+  font-weight: 300;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.45rem;
+}
+
+.status-todo {
+  background: #ebc251;
+}
+
+.status-progress {
+  background: var(--primary-color);
+}
+
+.status-done {
+  background: #417b5a;
+}
+
+.task-description {
+  font-size: 1.45rem;
+  font-weight: 300;
+  line-height: 1.8;
+  text-align: justify;
+  margin-bottom: 0.8rem;
 }
