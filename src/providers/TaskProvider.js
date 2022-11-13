@@ -1,7 +1,6 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import TaskContext from '../context/TaskContext';
 import TaskDispatchContext from '../context/TaskDispatchContext';
-import TaskService from '../services/task';
 
 function createInitialState(initialState) {
   return initialState;
@@ -10,28 +9,25 @@ function createInitialState(initialState) {
 function tasksReducer(tasks, action) {
   switch(action.type) {
     case 'init': {
-      return action.payload;
+      return { tasks: action.payload, loading: false };
     }
     case 'create': {
       const allTasks = [...tasks, action.payload];
-      return allTasks;
+      return { tasks: allTasks };
+    }
+    case 'loading': {
+      return { ...tasks , loading: true }
+    }
+    case 'error': {
+      return { ...tasks, loading: false, error: 'There is an error' }
     }
     default:
-      return []
+      return {}
   }
 }
 
 const TaskProvider = ({ children }) => {
-  const [tasks, dispatch] = useReducer(tasksReducer, [], createInitialState);
-
-  useEffect(() => {
-    console.log('ehehheheh')
-    TaskService.getAllTasks()
-    .then((response) => {
-      dispatch({ type: 'init', payload: response });
-    }).catch(console.log)
-  }, []);
-  
+  const [tasks, dispatch] = useReducer(tasksReducer, { loading: true, task: [], error: '' }, createInitialState);
   return (
     <TaskContext.Provider value={tasks}>
       <TaskDispatchContext.Provider value={dispatch}>
