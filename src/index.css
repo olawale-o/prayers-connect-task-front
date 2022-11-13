@@ -327,6 +327,10 @@ form {
   animation: loading 800ms linear 100ms infinite;
 }
 
+.helper-text {
+  font-size: 1.56rem;
+}
+
 @keyframes loading {
   0% {
     transform: rotate(0deg);
