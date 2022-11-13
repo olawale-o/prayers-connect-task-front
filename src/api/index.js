@@ -27,7 +27,7 @@ export const get = async (endpoint) => {
     throw new Error('Failed to fetch request');
   }
   const data = await response.json();
-  return data.todos;
+  return data.tasks;
 };
 
 export const put = async (endpoint, payload) => {
