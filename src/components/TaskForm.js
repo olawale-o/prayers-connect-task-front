@@ -30,12 +30,12 @@ const TaskForm = () => {
   return (
     <div className="task-form p-2">
       <form onSubmit={handleSubmit}>
-        <h1 className="task-form__title">Add todo</h1>
+        <h1 className="task-form__title">New Task</h1>
         <div className="field">
           <input type="text" name="title" onChange={onChange} value={values.title} className="input" placeholder="Title" />
         </div>
         <div className="field">
-          <textarea name="description" value={values.description} placeholder="Description" className="textareaa" onChange={onChange} />
+          <textarea name="description" value={values.description} placeholder="Description" className="textarea" onChange={onChange} />
         </div>
         <button type="submit" className="btn btn-primary">ADD</button>
       </form>
