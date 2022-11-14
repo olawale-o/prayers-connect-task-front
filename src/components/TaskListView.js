@@ -20,7 +20,7 @@ const TaskListView = ({ tasks, tab }) => {
     <div>
       {visibleTasks.length < 1 && (<p className="helper-text">No {tab} task(s) for now</p>)}
       {visibleTasks && (<ul className="task-list">
-        {visibleTasks.map((task) => (<Task task={task} key={task.id} />))}
+        {visibleTasks.map((task, i) => (<Task task={task} key={task.id} index={i} />))}
       </ul>)}
     </div>
   );
