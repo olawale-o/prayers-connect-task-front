@@ -226,6 +226,10 @@ form {
   background-color: var(--blur-primary-color);
 }
 
+.btn-primary:disabled {
+  background: #ccc;
+}
+
 .checkbox {
   cursor: pointer;
 }
