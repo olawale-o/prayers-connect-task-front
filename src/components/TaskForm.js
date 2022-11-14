@@ -35,6 +35,13 @@ const TaskForm = () => {
           <input type="text" name="title" onChange={onChange} value={values.title} className="input" placeholder="Title" />
         </div>
         <div className="field">
+          <select name="status" className="select">
+            <option value="todo">Todo</option>
+            <option value="in-progress">In-Progeress</option>
+            <option value="todo">Done</option>
+          </select>
+        </div>
+        <div className="field">
           <textarea name="description" value={values.description} placeholder="Description" className="textarea" onChange={onChange} />
         </div>
         <button type="submit" className="btn btn-primary">ADD</button>
