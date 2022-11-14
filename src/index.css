@@ -54,22 +54,6 @@ li {
   width: 100%;
 }
 
-.toast {
-  position: fixed;
-  bottom: 40px;
-  left: 10px;
-  background-color: #ccc;
-  padding: 2rem;
-  border-radius: 5px;
-  width: 400px;
-}
-
-.toast-text {
-  font-size: 1.5rem;
-  width: calc(80% - 2rem);
-  line-height: 1.6;
-}
-
 .task-container {
   flex: 1 1 calc(50% - 4rem);
 }
@@ -355,10 +339,31 @@ form {
   0% {
     transform: rotate(0deg);
   }
+  50% {
+    transform: rotate(180deg);
+  }
   70% {
     transform: rotate(280deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .task-container {
+    order: 2;
+  }
+  
+  .task-form {
+    order: 1;
+  }
+
+  .status-chip {
+    font-size: 1rem;
   }
 }
