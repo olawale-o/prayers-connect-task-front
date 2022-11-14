@@ -48,7 +48,13 @@ const TaskForm = () => {
           />
         </div>
         <div className="field">
-          <select name="status" className="select" onChange={onChange} value={values.status}>
+          <select
+            name="status"
+            className="select"
+            onChange={onChange}
+            value={values.status}
+            required
+          >
             <option value="">Status</option>
             <option value="todo">Todo</option>
             <option value="in-progress">In-Progress</option>
