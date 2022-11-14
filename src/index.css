@@ -178,6 +178,17 @@ form {
   outline: var(--primary-color);
 }
 
+.select {
+  width:  100%;
+  outline: none;
+  border: 1px solid #ccc;
+  transition: border-color 500ms linear;
+}
+
+.select:focus-within {
+  border-color: var(--primary-color);
+}
+
 .textarea {
   font-weight: 300;
   line-height: 1.6;
