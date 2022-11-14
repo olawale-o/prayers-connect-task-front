@@ -1,8 +1,13 @@
 import React from 'react';
+import Modal from './Modal';
 import useTaskDispatch from '../hooks/useTaskDispatch';
 
 const operations = ['todo', 'in-progress', 'done'];
 const Task = ({task, index}) => {
+  const [modal, setModal] = React.useState({
+    isOpen: false,
+    message: '',
+  });
   const { updateTask } = useTaskDispatch();
   const removeFrom = (index, operation) => {
     if (operation === 'in-progress' && (task.status === 'done' || task.status === 'todo')) {
@@ -14,7 +19,16 @@ const Task = ({task, index}) => {
       updateTask(index, {task: { status: operation, id: task.id }});
       return;
     }
-    console.log('You cannot move to '+ operation);
+    setModal((state) => ({
+      ...state,
+      isOpen: true,
+      message: `You are trying to move task to ${operation}
+      Kindly move a step forward or backward`
+    }))
+  };
+
+  const closeModal = () => {
+    setModal((state) => ({ ...state, message: '', isOpen: false  }))
   };
 
   return (
@@ -43,6 +57,7 @@ const Task = ({task, index}) => {
           ))}
         </div>
       </div>
+      <Modal modal={modal} closeModal={closeModal} />
     </li>
   )
 };
