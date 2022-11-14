@@ -1,17 +1,21 @@
-import React, { useContext } from 'react';
-import useTask from '../hooks/useTask';
+import React from 'react';
 import useTaskDispatch from '../hooks/useTaskDispatch';
 
-
-const Task = ({task}) => {
-  // const dispatch = useTaskDispatch();
-  // const tasks = useTask();
-  // const onTodoUpdate = () => {
-  //   // const todoCategoryIndex = todos.findIndex((todo: CategoryInterface) => todo.category === category);
-  //   //const todoCategory = todos[todoCategoryIndex];
-  //   dispatch('updateStatus', { title, description, status } );
-  
-  // };
+const operations = ['todo', 'in-progress', 'done'];
+const Task = ({task, index}) => {
+  const { updateTask } = useTaskDispatch();
+  const removeFrom = (index, operation) => {
+    if (operation === 'in-progress' && (task.status === 'done' || task.status === 'todo')) {
+      updateTask(index, {task: { status: operation, id: task.id }});
+      return ;
+    }
+    
+    if ((operation === 'done' || operation === 'todo') && task.status === 'in-progress') {
+      updateTask(index, {task: { status: operation, id: task.id }});
+      return;
+    }
+    console.log('You cannot move to '+ operation);
+  };
 
   return (
     <li className="task-item">
@@ -27,9 +31,16 @@ const Task = ({task}) => {
           {task.description}
         </p>
         <div className="task-status">
-          <button className="status-chip status-todo">todo</button>
-          <button className="status-chip status-progress">in-progress</button>
-          <button className="status-chip status-done">completed</button>
+          {operations.map((operation) => (
+            <button
+              className={`status-chip ${operation === 'in-progress' ? 'status-progress' : `status-${operation}`}`}
+              disabled={task.status === operation}
+              key={operation}
+              onClick={() => removeFrom(index, operation)}
+            >
+              {operation}
+              </button>
+          ))}
         </div>
       </div>
     </li>
