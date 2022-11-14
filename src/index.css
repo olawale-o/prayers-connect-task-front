@@ -335,6 +335,49 @@ form {
   font-size: 1.56rem;
 }
 
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1500;
+  background: #eee;
+  width: 30%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  transform: translate(-50%, -50%);
+  border-radius: 50px;
+}
+
+.modal-text {
+  font-size: 1.65rem;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.modal-close__btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.close-btn {
+  background: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: inherit;
+  outline: none;
+  border: none;
+  color: #fff
+}
+
 @keyframes loading {
   0% {
     transform: rotate(0deg);
