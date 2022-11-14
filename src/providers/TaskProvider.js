@@ -1,25 +1,31 @@
 import React, { useReducer } from 'react';
 import TaskContext from '../context/TaskContext';
 import TaskDispatchContext from '../context/TaskDispatchContext';
+import TaskService from '../services/task';
 
 function createInitialState(initialState) {
   return initialState;
 }
 
-function tasksReducer(tasks, action) {
+function tasksReducer(state, action) {
   switch(action.type) {
     case 'init': {
       return { tasks: action.payload, loading: false };
     }
     case 'create': {
-      const allTasks = [...tasks, action.payload];
-      return { tasks: allTasks };
+      const allTasks = [...state.tasks, action.payload];
+      return { tasks: allTasks, loading: false, error: '' };
+    }
+    case 'remove': {
+      const allTasks = [...state.tasks];
+      allTasks.splice(action.payload, 1);
+      return { tasks: allTasks, loading: false, error: '' };
     }
     case 'loading': {
-      return { ...tasks , loading: true }
+      return { ...state, loading: true }
     }
     case 'error': {
-      return { ...tasks, loading: false, error: 'There is an error' }
+      return { ...state.tasks, loading: false, error: 'There is an error' }
     }
     default:
       return {}
@@ -27,10 +33,39 @@ function tasksReducer(tasks, action) {
 }
 
 const TaskProvider = ({ children }) => {
-  const [tasks, dispatch] = useReducer(tasksReducer, { loading: true, task: [], error: '' }, createInitialState);
+  const [tasks, dispatch] = useReducer(tasksReducer, { loading: true, tasks: [], error: '' }, createInitialState);
+  function updateTask(index, data) {
+    TaskService.updateTask(data)
+    .then((_response) => {
+      dispatch({ type: 'remove', payload: index });
+    }).catch((err) => setError('Cannot update'));
+  }
+
+  function addTask(data) {
+    dispatch({ type: 'create', payload: data });
+  }
+
+  function setLoading(data) {
+    dispatch({ type: 'loading' });
+  }
+
+  function getTasks(data) {
+    dispatch({ type: 'init', payload: data })
+  }
+
+  function setError(message) {
+    dispatch({ type: 'error', payload: message })
+  }
   return (
     <TaskContext.Provider value={tasks}>
-      <TaskDispatchContext.Provider value={dispatch}>
+      <TaskDispatchContext.Provider value={{
+        dispatch,
+        updateTask,
+        addTask,
+        setLoading,
+        getTasks,
+        setError,
+      }}>
         <div className="container">
           <div className="d-flex justify-space-between">
             {children}
