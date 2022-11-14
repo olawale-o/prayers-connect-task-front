@@ -10,16 +10,16 @@ function createInitialState(initialState) {
 function tasksReducer(state, action) {
   switch(action.type) {
     case 'init': {
-      return { tasks: action.payload, loading: false };
+      return { tasks: action.payload, loading: false, total: action.payload.length };
     }
     case 'create': {
       const allTasks = [...state.tasks, action.payload];
-      return { tasks: allTasks, loading: false, error: '' };
+      return { tasks: allTasks, loading: false, error: '', total: allTasks.length };
     }
     case 'remove': {
       const allTasks = [...state.tasks];
       allTasks.splice(action.payload, 1);
-      return { tasks: allTasks, loading: false, error: '' };
+      return { tasks: allTasks, loading: false, error: '', total: allTasks.length };
     }
     case 'loading': {
       return { ...state, loading: true }
@@ -33,7 +33,9 @@ function tasksReducer(state, action) {
 }
 
 const TaskProvider = ({ children }) => {
-  const [tasks, dispatch] = useReducer(tasksReducer, { loading: true, tasks: [], error: '' }, createInitialState);
+  const [tasks, dispatch] = useReducer(
+    tasksReducer, { loading: true, tasks: [], error: '', total: 0 },
+    createInitialState);
   function updateTask(index, data) {
     TaskService.updateTask(data)
     .then((_response) => {
@@ -45,7 +47,7 @@ const TaskProvider = ({ children }) => {
     dispatch({ type: 'create', payload: data });
   }
 
-  function setLoading(data) {
+  function setLoading() {
     dispatch({ type: 'loading' });
   }
 
