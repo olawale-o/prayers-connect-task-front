@@ -3,7 +3,7 @@ import useTaskDispatch from '../hooks/useTaskDispatch';
 import TaskService from '../services/task';
 
 const TaskForm = () => {
-  const dispatch = useTaskDispatch();
+  const { addTask } = useTaskDispatch();
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -20,10 +20,9 @@ const TaskForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDisabled((state) => !state);
-    dispatch({ type: 'loading' });
     const data = await TaskService.add({ task: { ...values } })
     if (data) {
-      dispatch({ type: 'create', payload: data });
+      addTask(data);
       setValues({
         title: '',
         description: '',
