@@ -38,7 +38,7 @@ const Task = ({task, index}) => {
               key={operation}
               onClick={() => removeFrom(index, operation)}
             >
-              {operation}
+              {`Move to ${operation}`}
               </button>
           ))}
         </div>

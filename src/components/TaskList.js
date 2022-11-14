@@ -7,7 +7,7 @@ import TaskListView from './TaskListView';
 
 const TaskList = () => {
   const tabs = ['todo', 'in-progress', 'done'];
-  const { loading, tasks } = useTask();
+  const { loading, tasks, total } = useTask();
   const { setLoading, getTasks, setError } = useTaskDispatch();
   const [tabIndex, setTabIndex] = React.useState(1);
   const [filter, setFilter] = React.useState(tabs[0]);
@@ -19,8 +19,8 @@ const TaskList = () => {
   React.useEffect(() => {
     setLoading();
     TaskService.getAllTasks(filter)
-    .then((response) => {
-      getTasks(response)
+      .then((response) => {
+        getTasks(response)
     }).catch((err) => setError('error'));
   }, [filter]);
   return (
