@@ -274,6 +274,11 @@ form {
   font-size: 1.45rem;
 }
 
+.status-chip:disabled {
+  background: #eee;
+  cursor: initial;
+}
+
 .status-todo {
   background: #ebc251;
 }
