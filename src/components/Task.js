@@ -22,8 +22,8 @@ const Task = ({task, index}) => {
     setModal((state) => ({
       ...state,
       isOpen: true,
-      message: `You are trying to move task to ${operation}
-      Kindly move a step forward or backward`
+      message: `You are trying to move task to ${operation}.
+      You can either move a step forward or backward`
     }))
   };
 
