@@ -4,7 +4,7 @@ const Tabs = ({ switchTabs, tabIndex }) => {
     <div className="tab-bar" role="tablist" aria-label="Status">
       <ul className="tabs">
         {tabs.map((tab) => (
-          <li key={tab.index} className={`tab-item ${tabIndex === tab.index && 'active'}`}>
+          <li role={tab.title} key={tab.index} className={`tab-item ${tabIndex === tab.index && 'active'}`}>
             <button
               className="tab-button"
               onClick={() => switchTabs(tab.index)}
