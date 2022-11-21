@@ -45,6 +45,7 @@ const TaskForm = () => {
             className="input"
             placeholder="Title"
             required
+            aria-label="title"
           />
         </div>
         <div className="field">
@@ -54,6 +55,7 @@ const TaskForm = () => {
             onChange={onChange}
             value={values.status}
             required
+            aria-label="status"
           >
             <option value="">Status</option>
             <option value="todo">Todo</option>
@@ -69,9 +71,17 @@ const TaskForm = () => {
             className="textarea"
             onChange={onChange}
             required
+            aria-label="description"
           />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={disabled}>ADD</button>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={disabled}
+          aria-label="new"
+          >
+            ADD
+          </button>
       </form>
     </div>
   );
