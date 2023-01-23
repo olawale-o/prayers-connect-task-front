@@ -429,6 +429,18 @@ form {
   color: #fff
 }
 
+.edit-button {
+  outline: none;
+  border: none;
+  background: #ccc;
+  padding: 0.5px 2rem;
+  cursor: pointer;
+}
+
+.edit {
+  font-size: 1.5rem;
+}
+
 @keyframes loading {
   0% {
     transform: rotate(0deg);

@@ -36,9 +36,12 @@ const Task = ({task, index}) => {
       <div className="task-item__content">
         <div className="task-item__header d-flex justify-space-between">
           <h2 className="task-item__title">{task.title}</h2>
-          {task.status === 'todo' && <span className="status">todo</span>}
+          <button type="button" className="edit-button" aria-label="button">
+            <span className="edit">Edit</span>
+          </button>
+          {/* {task.status === 'todo' && <span className="status">todo</span>}
           {task.status === 'in-progress' && <span className="status">in-progress</span>}
-          {task.status === 'done' && <span className="status">done</span>}
+          {task.status === 'done' && <span className="status">done</span>} */}
 
         </div>
         <p className="task-description">
