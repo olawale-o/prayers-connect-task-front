@@ -24,8 +24,10 @@ const Modal = ({ isOpen, message, closeModal }) => {
                 X
               </button>
             </div>
-            <h2 className="modal-label" id="dialog-label">Message</h2>
-            <p className="modal-text" id="dialog-desc">{message}</p>
+            <div className="modal-body">
+              <h2 className="modal-label" id="dialog-label">Message</h2>
+              <p className="modal-text" id="dialog-desc">{message}</p>
+            </div>
           </div>
         </div>
       </div>,
