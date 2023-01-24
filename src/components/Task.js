@@ -1,13 +1,14 @@
 import React from 'react';
 import Modal from './Modal';
+import TaskEditModal from './TaskEditModal';
 import useTaskDispatch from '../hooks/useTaskDispatch';
+import { useModals } from '../hooks/useModals';
 
 const operations = ['todo', 'in-progress', 'done'];
 const Task = ({task, index}) => {
-  const [modal, setModal] = React.useState({
-    isOpen: false,
-    message: '',
-  });
+  const [openEditModal, closeEditModal, editModal] = useModals('EditModal');
+  const [openModal, closeModal, errorModal] = useModals('ErrorModal');
+  const [message, setMessage] = React.useState('');
   const { updateTask } = useTaskDispatch();
   const removeFrom = (index, operation) => {
     if (operation === 'in-progress' && (task.status === 'done' || task.status === 'todo')) {
@@ -19,16 +20,9 @@ const Task = ({task, index}) => {
       updateTask(index, {task: { status: operation, id: task.id }});
       return;
     }
-    setModal((state) => ({
-      ...state,
-      isOpen: true,
-      message: `You are trying to move task to ${operation}.
-      You can either move a step forward or backward`
-    }))
-  };
-
-  const closeModal = () => {
-    setModal((state) => ({ ...state, message: '', isOpen: false  }))
+    setMessage(`You are trying to move task to ${operation}.
+      You can either move a step forward or backward`);
+    openModal();
   };
 
   return (
@@ -36,7 +30,12 @@ const Task = ({task, index}) => {
       <div className="task-item__content">
         <div className="task-item__header d-flex justify-space-between">
           <h2 className="task-item__title">{task.title}</h2>
-          <button type="button" className="edit-button" aria-label="button">
+          <button
+            type="button"
+            className="edit-button"
+            aria-label="button"
+            onClick={openEditModal}
+          >
             <span className="edit">Edit</span>
           </button>
           {/* {task.status === 'todo' && <span className="status">todo</span>}
@@ -60,7 +59,16 @@ const Task = ({task, index}) => {
           ))}
         </div>
       </div>
-      <Modal modal={modal} closeModal={closeModal} />
+      {/* <Modal modal={modal} closeModal={onCloseModal} /> */}
+      {/* <Modal closeModal={closeModal} /> */}
+      {errorModal.ErrorModal && <Modal isOpen={errorModal.ErrorModal} message={message} closeModal={closeModal} />}
+      {editModal.EditModal && (
+        <TaskEditModal
+          isOpen={editModal.EditModal}
+          closeModal={closeEditModal}
+          task= {task}
+        />
+      )}
     </li>
   )
 };
