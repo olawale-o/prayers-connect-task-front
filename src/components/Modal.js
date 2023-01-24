@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 
-const Modal = ({ isOpen, message, closeModal }) => {
+const Modal = ({ isOpen, children, closeModal }) => {
   return (
     ReactDOM.createPortal(
       <div
@@ -25,8 +25,7 @@ const Modal = ({ isOpen, message, closeModal }) => {
               </button>
             </div>
             <div className="modal-body">
-              <h2 className="modal-label" id="dialog-label">Message</h2>
-              <p className="modal-text" id="dialog-desc">{message}</p>
+              {children}
             </div>
           </div>
         </div>
