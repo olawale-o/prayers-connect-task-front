@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from './Modal';
 import TaskEditModal from './TaskEditModal';
 import AlertModal from './AlertModal';
 import useTaskDispatch from '../hooks/useTaskDispatch';
