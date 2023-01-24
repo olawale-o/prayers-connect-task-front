@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './Modal';
 import TaskEditModal from './TaskEditModal';
+import AlertModal from './AlertModal';
 import useTaskDispatch from '../hooks/useTaskDispatch';
 import { useModals } from '../hooks/useModals';
 
@@ -61,7 +62,12 @@ const Task = ({task, index}) => {
       </div>
       {/* <Modal modal={modal} closeModal={onCloseModal} /> */}
       {/* <Modal closeModal={closeModal} /> */}
-      {errorModal.ErrorModal && <Modal isOpen={errorModal.ErrorModal} message={message} closeModal={closeModal} />}
+      {errorModal.ErrorModal && (
+        <AlertModal
+          isOpen={errorModal.ErrorModal}
+          message={message}
+          closeModal={closeModal}
+        />)}
       {editModal.EditModal && (
         <TaskEditModal
           isOpen={editModal.EditModal}
