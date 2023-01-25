@@ -21,6 +21,14 @@ function tasksReducer(state, action) {
       allTasks.splice(action.payload, 1);
       return { tasks: allTasks, loading: false, error: '', total: allTasks.length };
     }
+    case 'update': {
+      const { index, data } = action.payload;
+      const allTasks = [...state.tasks];
+      const foundTask = allTasks.find((task) => task.id === data.task.id);
+      const newTask = { ...foundTask, ...data.task };
+      allTasks.splice(index, 1, newTask);
+      return { tasks: allTasks, loading: false, error: '', total: allTasks.length };
+    }
     case 'loading': {
       return { ...state, loading: true }
     }
@@ -36,10 +44,14 @@ const TaskProvider = ({ children }) => {
   const [tasks, dispatch] = useReducer(
     tasksReducer, { loading: true, tasks: [], error: '', total: 0 },
     createInitialState);
-  function updateTask(index, data) {
+  function updateTask(index, data, flag = 'remove') {
     TaskService.updateTask(data)
     .then((_response) => {
-      dispatch({ type: 'remove', payload: index });
+      if (flag === 'remove') {
+        dispatch({ type: 'remove', payload: index });
+      } else {
+        dispatch({ type: 'update', payload: { index, data } });
+      }
     }).catch((err) => setError('Cannot update'));
   }
 
