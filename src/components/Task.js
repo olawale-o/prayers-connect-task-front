@@ -72,6 +72,8 @@ const Task = ({task, index}) => {
           isOpen={editModal.EditModal}
           closeModal={closeEditModal}
           task= {task}
+          updateTask={updateTask}
+          index={index}
         />
       )}
     </li>
