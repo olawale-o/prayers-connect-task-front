@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import useTaskDispatch from '../hooks/useTaskDispatch';
 import TaskService from '../services/task';
+import useTaskForm from '../hooks/useTaskForm';
 
 const TaskForm = () => {
-  const { addTask } = useTaskDispatch();
-  const [values, setValues] = useState({
+  const [values, setValues, clearValues] = useTaskForm({
     title: '',
     description: '',
     status: '',
   });
+  const { addTask } = useTaskDispatch();
   const [disabled, setDisabled] = useState(false);
   const onChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name.toLowerCase()]: value.toLowerCase()
-    });
+    setValues(e);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,11 +20,7 @@ const TaskForm = () => {
     const data = await TaskService.add({ task: { ...values } })
     if (data) {
       addTask(data);
-      setValues({
-        title: '',
-        description: '',
-        status: '',
-      });
+      clearValues();
       setDisabled((state) => !state);
     }
   };

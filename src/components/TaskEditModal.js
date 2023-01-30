@@ -1,20 +1,17 @@
-import { useState } from "react";
 import Modal from "./Modal";
 import useTaskDispatch from '../hooks/useTaskDispatch';
 import useTask from "../hooks/useTask";
+import useTaskForm from "../hooks/useTaskForm";
 
 const TaskEditModal = ({ isOpen, closeModal, task, index }) => {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues, clearFormValues] = useTaskForm({
     title: task.title,
     description: task.description,
     id: task.id,
     status: task.status,
   });
   const onformChange = (e) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
+    setFormValues(e);
   };
   const { updateTask } = useTaskDispatch();
   const { error } = useTask();
@@ -25,6 +22,7 @@ const TaskEditModal = ({ isOpen, closeModal, task, index }) => {
         <form onSubmit={(e) => {
           e.preventDefault();
           updateTask(index, { task: { ...formValues } }, 'update');
+          clearFormValues();
           closeModal();
         }}>
             <h1 className="task-form__title">Update task</h1>
