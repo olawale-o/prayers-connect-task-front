@@ -4,21 +4,25 @@ export const useModals = (modalName = '') => {
   const [state, setState] = useState({
     [modalName]: false,
   }); 
-  const openModal = () =>
+  const openModal = () => {
     setState({
       ...state,
       [modalName]: true,
     });
+    document.body.style.overflow = 'hidden';
+  };
 
-    const closeModal = () =>
-      setState({
-        ...state,
-        [modalName]: false,
+  const closeModal = () => {
+    setState({
+      ...state,
+      [modalName]: false,
     });
+    document.body.style.overflow = 'unset';
+  };
     
-    return [
-      openModal,
-      closeModal,
-      { [modalName]: state[modalName] },
-    ];
+  return [
+    openModal,
+    closeModal,
+    { [modalName]: state[modalName] },
+  ];
 };
