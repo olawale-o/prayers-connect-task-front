@@ -355,6 +355,7 @@ form {
 .modal.show {
   opacity: 1;
   visibility: visible;
+  overflow: scroll;
 }
 
 .modal-background {
