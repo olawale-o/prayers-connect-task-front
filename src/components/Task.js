@@ -61,21 +61,18 @@ const Task = ({task, index}) => {
       </div>
       {/* <Modal modal={modal} closeModal={onCloseModal} /> */}
       {/* <Modal closeModal={closeModal} /> */}
-      {errorModal.ErrorModal && (
-        <AlertModal
-          isOpen={errorModal.ErrorModal}
-          message={message}
-          closeModal={closeModal}
-        />)}
-      {editModal.EditModal && (
-        <TaskEditModal
-          isOpen={editModal.EditModal}
-          closeModal={closeEditModal}
-          task= {task}
-          updateTask={updateTask}
-          index={index}
-        />
-      )}
+      <AlertModal
+        isOpen={errorModal.ErrorModal}
+        message={message}
+        closeModal={closeModal}
+      />
+      <TaskEditModal
+        isOpen={editModal.EditModal}
+        closeModal={closeEditModal}
+        task= {task}
+        updateTask={updateTask}
+        index={index}
+      />
     </li>
   )
 };

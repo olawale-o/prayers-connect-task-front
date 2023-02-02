@@ -7,7 +7,7 @@ const Modal = ({ isOpen, children, closeModal }) => {
         className={`modal ${isOpen && 'show'}`}
       >
         <div
-          className="modal-background"
+          className={`modal-background ${isOpen && 'show'}`}
           aria-modal="true"
           role="alertdialog"
           aria-describedby="dialog-desc"
