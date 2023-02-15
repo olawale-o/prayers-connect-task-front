@@ -4,8 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TaskDetail from './pages/TaskDetail';
+
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
+  { path: '/task/:id', element: <TaskDetail /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
