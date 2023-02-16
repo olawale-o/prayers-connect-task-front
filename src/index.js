@@ -5,10 +5,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import TaskDetail from './pages/TaskDetail';
+import Task from './pages/Task';
 
 const router = createBrowserRouter([
-  { path: '/', element: <App /> },
-  { path: '/task/:id', element: <TaskDetail /> },
+  { path: '/',
+    element: <App />,
+    children: [
+      { index: true, element: <Task /> },
+      { path: '/task/:id', element: <TaskDetail /> },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
