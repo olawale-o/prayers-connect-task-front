@@ -1,12 +1,13 @@
 import React from 'react';
-import TaskEditModal from './TaskEditModal';
+import { Link } from 'react-router-dom';
+// import TaskEditModal from './TaskEditModal';
 import AlertModal from './AlertModal';
 import useTaskDispatch from '../hooks/useTaskDispatch';
 import { useModals } from '../hooks/useModals';
 
 const operations = ['todo', 'in-progress', 'done'];
 const Task = ({task, index}) => {
-  const [openEditModal, closeEditModal, editModal] = useModals('EditModal');
+  // const [openEditModal, closeEditModal, editModal] = useModals('EditModal');
   const [openModal, closeModal, errorModal] = useModals('ErrorModal');
   const [message, setMessage] = React.useState('');
   const { updateTask } = useTaskDispatch();
@@ -30,14 +31,16 @@ const Task = ({task, index}) => {
       <div className="task-item__content">
         <div className="task-item__header d-flex justify-space-between">
           <h2 className="task-item__title">{task.title}</h2>
-          <button
+          {/* <button
             type="button"
             className="edit-button"
             aria-label="button"
             onClick={openEditModal}
-          >
-            <span className="edit">Edit</span>
-          </button>
+          > */}
+            <Link to={`task/${task.id}`}>
+              <span className="edit">Edit</span>
+            </Link>
+          {/* </button> */}
           {/* {task.status === 'todo' && <span className="status">todo</span>}
           {task.status === 'in-progress' && <span className="status">in-progress</span>}
           {task.status === 'done' && <span className="status">done</span>} */}
@@ -59,20 +62,18 @@ const Task = ({task, index}) => {
           ))}
         </div>
       </div>
-      {/* <Modal modal={modal} closeModal={onCloseModal} /> */}
-      {/* <Modal closeModal={closeModal} /> */}
       <AlertModal
         isOpen={errorModal.ErrorModal}
         message={message}
         closeModal={closeModal}
       />
-      <TaskEditModal
+      {/* <TaskEditModal
         isOpen={editModal.EditModal}
         closeModal={closeEditModal}
         task= {task}
         updateTask={updateTask}
         index={index}
-      />
+      /> */}
     </li>
   )
 };
