@@ -1,13 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import useTaskDispatch from '../hooks/useTaskDispatch';
 import useTask from "../hooks/useTask";
 import useTaskForm from "../hooks/useTaskForm";
 
 const TaskEditModal = ({ isOpen, closeModal, task, index }) => {
+  const navigate = useNavigate();
   const [formValues, setFormValues, clearFormValues] = useTaskForm({
     title: task.title,
     description: task.description,
-    id: task.id,
+    id: task._id,
     status: task.status,
   });
   const onformChange = (e) => {
@@ -17,13 +19,14 @@ const TaskEditModal = ({ isOpen, closeModal, task, index }) => {
   const { error } = useTask();
   if (error) console.log(error);
   return (
-    <Modal isOpen={isOpen} closeModal={closeModal}>
+    <Modal isOpen={isOpen} closeModal={() => closeModal('/')}>
       <div className="task-form p-2">
-        <form onSubmit={(e) => {
+        <form onSubmit={async (e) => {
           e.preventDefault();
-          updateTask(index, { task: { ...formValues } }, 'update');
+          await updateTask(index, { task: { ...formValues } }, 'update');
           clearFormValues();
           closeModal();
+          navigate('/', { replace: true });
         }}>
             <h1 className="task-form__title">Update task</h1>
             <div className="field">
@@ -49,6 +52,7 @@ const TaskEditModal = ({ isOpen, closeModal, task, index }) => {
                 onChange={onformChange}
               />
             </div>
+            <input type="hidden" name="id" value={formValues.id} />
             <button
               type="submit"
               className="btn btn-primary"
