@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import TaskEditModal from './TaskEditModal';
 import AlertModal from './AlertModal';
 import useTaskDispatch from '../hooks/useTaskDispatch';
 import { useModals } from '../hooks/useModals';
 
 const operations = ['todo', 'in-progress', 'done'];
 const Task = ({task, index}) => {
-  // const [openEditModal, closeEditModal, editModal] = useModals('EditModal');
   const [openModal, closeModal, errorModal] = useModals('ErrorModal');
   const [message, setMessage] = React.useState('');
   const { updateTask } = useTaskDispatch();
@@ -65,15 +63,8 @@ const Task = ({task, index}) => {
       <AlertModal
         isOpen={errorModal.ErrorModal}
         message={message}
-        closeModal={closeModal}
+        closeModal={() => closeModal()}
       />
-      {/* <TaskEditModal
-        isOpen={editModal.EditModal}
-        closeModal={closeEditModal}
-        task= {task}
-        updateTask={updateTask}
-        index={index}
-      /> */}
     </li>
   )
 };
