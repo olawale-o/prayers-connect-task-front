@@ -8,12 +8,17 @@ export default class TaskService {
 
   static async getAllTasks(filter = 'todo') {
     const data = await get('task', filter);
-    return data;
+    return data.tasks;
   }
 
   static async updateTask(payload) {
     const data = await put('task', payload);
     return data.task
+  }
+
+  static async getTask(id) {
+    const data = await get(`task/${id}`);
+    return data;
   }
 }
 
