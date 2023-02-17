@@ -22,12 +22,19 @@ export const post = async (endpoint, payload) => {
 };
 
 export const get = async (endpoint, filter) => {
-  const response = await fetch(`${BASE_URI}${endpoint}?status=${filter}`);
+  console.log(endpoint);
+  let response = null;
+  if (filter) {
+    response = await fetch(`${BASE_URI}${endpoint}?status=${filter}`);
+  } else {
+    response = await fetch(`${BASE_URI}${endpoint}`);
+  }
   if (!response.ok) {
     throw new Error('Failed to fetch request');
   }
   const data = await response.json();
-  return data.tasks;
+
+  return data;
 };
 
 export const put = async (endpoint, payload) => {
