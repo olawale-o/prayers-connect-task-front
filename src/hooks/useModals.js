@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useModals = (modalName = '') => {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     [modalName]: false,
   }); 
@@ -12,12 +14,16 @@ export const useModals = (modalName = '') => {
     document.body.style.overflow = 'hidden';
   };
 
-  const closeModal = () => {
+  const closeModal = (url) => {
     setState({
       ...state,
       [modalName]: false,
     });
     document.body.style.overflow = 'unset';
+    if (url) {
+      navigate(url, { replace: true });
+      return;
+    }
   };
     
   return [
